@@ -1,10 +1,13 @@
 .navbar {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  width: 100%;
   transition: 0.2s ease-in-out;
-  width: 100vw;
-  height: 2em;
+  height: 3.5em;
   margin: 0;
   padding: 0;
-
+  background-color: #fff;
   transition: 0.2 ease-in-out;
 }
 
@@ -14,6 +17,7 @@
   list-style: none;
   display: flex;
   justify-content: space-evenly;
+  margin-top: 1em;
 }
 
 .link {
@@ -29,8 +33,8 @@ a {
 }
 
 .hamburger {
-  z-index: 1;
-  position: absolute;
+  z-index: 11;
+  position: fixed;
   top: 0;
   left: 0;
   display: none;
@@ -56,8 +60,11 @@ a {
 
 @media screen and (max-width: 685px) {
   .navbar {
-    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
     transform: translateX(-100vw);
+    margin: 0;
   }
 
   .links {

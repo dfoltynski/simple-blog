@@ -1,8 +1,11 @@
 .navbar {
+  transition: 0.2s ease-in-out;
   width: 100vw;
   height: 2em;
   margin: 0;
   padding: 0;
+
+  transition: 0.2 ease-in-out;
 }
 
 .links {
@@ -26,11 +29,14 @@ a {
 }
 
 .hamburger {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
   margin: 1em;
-  /* background-color: rgb(242, 221, 136); */
   width: 2em;
   height: 1.5em;
-  display: flex;
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
@@ -38,7 +44,6 @@ a {
 }
 
 .bar {
-  /* position: absolute; */
   transition: 0.2s ease-in-out;
   width: 100%;
   height: 0.25em;
@@ -52,6 +57,7 @@ a {
 @media screen and (max-width: 685px) {
   .navbar {
     position: absolute;
+    transform: translateX(-100vw);
   }
 
   .links {
@@ -63,5 +69,9 @@ a {
 
   .link {
     margin: 0.5em;
+  }
+
+  .hamburger {
+    display: flex;
   }
 }

@@ -1,10 +1,6 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import styles from "./ArticlesList.module.css";
 import { ArticleTile } from "../index";
 import "../../App.css";
-// import { useDispatch, useSelector } from "react-redux";
-// import { RootState } from "../../reducers";
 
 interface IArticle {
   title: string;
@@ -18,19 +14,19 @@ export default function ArticlesList() {
   const [articles, setArticles] = useState<IArticle[]>([]);
   const [loaded, setLoaded] = useState<boolean>(false);
 
-  // const favorites = useSelector((state: RootState) => state.favorites);
-
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get(
-          "https://jsonplaceholder.typicode.com/posts"
-        );
+        const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
+          method: "GET",
+        });
 
-        res.data.forEach((item: any) => {
+        const articles = await res.json();
+
+        articles.forEach((item: any) => {
           item.favorite = false;
         });
-        setArticles(res.data);
+        setArticles(articles);
         setLoaded(true);
       } catch (error) {
         console.log(error);

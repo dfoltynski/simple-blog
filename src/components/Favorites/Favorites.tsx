@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
-import axios from "axios";
 import "../../App.css";
 import { ArticleTile } from "../index";
 import styles from "./Favorites.module.css";
 import { Link } from "react-router-dom";
-import { AiFillHeart } from "react-icons/ai";
 
 interface IArticle {
   title: string;
@@ -22,11 +20,14 @@ export default function Favorites() {
 
   useEffect(() => {
     favorites.forEach(async (articleID) => {
-      let res = await axios.get(
-        `https://jsonplaceholder.typicode.com/posts/${articleID}`
+      let res = await fetch(
+        `https://jsonplaceholder.typicode.com/posts/${articleID}`,
+        { method: "GET" }
       );
 
-      setFavoriteArticles((prevState) => [...prevState, res.data]);
+      let favorite = await res.json();
+
+      setFavoriteArticles((prevState) => [...prevState, favorite]);
     });
   }, []);
   return (

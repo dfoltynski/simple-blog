@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import styles from "./Article.module.css";
 import "../../App.css";
 import { Button } from "../index";
@@ -51,14 +50,21 @@ export default function Article() {
   useEffect(() => {
     (async () => {
       try {
-        const articleRes = await axios.get(
-          `https://jsonplaceholder.typicode.com/posts/${id}`
+        const articleRes = await fetch(
+          `https://jsonplaceholder.typicode.com/posts/${id}`,
+          { method: "GET" }
         );
-        const commentsRes = await axios.get(
-          `https://jsonplaceholder.typicode.com/comments?postId=${id}`
+        const commentsRes = await fetch(
+          `https://jsonplaceholder.typicode.com/comments?postId=${id}`,
+          {
+            method: "GET",
+          }
         );
-        setArticle(articleRes.data);
-        setComments(commentsRes.data);
+
+        const article = await articleRes.json();
+        const comments = await commentsRes.json();
+        setArticle(article);
+        setComments(comments);
         setIsLoading(false);
       } catch (error) {
         console.log(error);

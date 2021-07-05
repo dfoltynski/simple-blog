@@ -21,6 +21,15 @@ export default function Navbar() {
     }
   };
 
+  const hideNavbar = () => {
+    if (window.innerWidth <= 685) {
+      meatRef.current.classList.remove(styles.hide);
+      topBunRef.current.style.transform = `none`;
+      bottomBunRef.current.style.transform = `none`;
+      navRef.current.style.transform = `translateX(-100vw)`;
+    }
+  };
+
   return (
     <>
       <div className={styles.hamburger} onClick={transformHamburger}>
@@ -31,9 +40,11 @@ export default function Navbar() {
       <nav className={styles.navbar} ref={navRef}>
         <ul className={styles.links}>
           <li className={styles.link}>
-            <Link to="/">Lista wszystkich postów</Link>
+            <Link to="/" onClick={hideNavbar}>
+              Lista wszystkich postów
+            </Link>
           </li>
-          <li className={styles.link}>
+          <li className={styles.link} onClick={hideNavbar}>
             <Link to="/ulubione">Twoje ulubione posty</Link>
           </li>
         </ul>

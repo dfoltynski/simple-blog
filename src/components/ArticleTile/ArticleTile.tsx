@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavorite, removeFavorite } from "../../actions/favoritesAction";
-import { activateHeart, deactivateHeart } from "../../actions/heartActions";
 import styles from "./ArticleTile.module.css";
 import { Button } from "../index";
 import { AiFillHeart } from "react-icons/ai";

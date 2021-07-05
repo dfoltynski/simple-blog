@@ -28,6 +28,9 @@ export default function Article() {
   const commentFieldRef = useRef<HTMLInputElement>(
     document.createElement("input")
   );
+  const userFieldRef = useRef<HTMLInputElement>(
+    document.createElement("input")
+  );
   const { id } = useParams<IParams>();
   const [article, setArticle] = useState<IArticle>({
     title: "",
@@ -73,6 +76,14 @@ export default function Article() {
           <p className={styles.body}>{[...Array(6)].map(() => article.body)}</p>
           <div className={styles.commentsContainer}>
             <h2>Komentarze</h2>
+            <input
+              placeholder="Nazwa użytkownika"
+              type="text"
+              name="comment"
+              id="comment"
+              ref={userFieldRef}
+              className={styles.userField}
+            />
             <input
               placeholder="Treść komentarza"
               type="text"

@@ -7,6 +7,12 @@
   position: relative;
   background-color: transparent;
   font-size: 15px;
+
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
 }
 
 .button::before {

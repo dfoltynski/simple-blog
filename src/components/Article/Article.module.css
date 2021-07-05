@@ -1,0 +1,42 @@
+.body {
+  color: #525252;
+}
+
+.commentsContainer {
+  margin-top: 4em;
+  border-top: 2px solid #f1f1f1;
+  display: flex;
+  flex-direction: column;
+}
+
+.commentField {
+  padding: 0.3em;
+  font-size: 16px;
+  outline: none;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #5b5b5b;
+}
+
+.button {
+  align-self: flex-end;
+}
+
+.name {
+  margin: 0;
+  padding: 0;
+}
+
+.commentBody {
+  font-size: 14px;
+  margin-left: 1em;
+}
+
+.comments {
+  margin-top: 4em;
+}
+
+.comment {
+  font-weight: 500;
+  margin-bottom: 2em;
+}

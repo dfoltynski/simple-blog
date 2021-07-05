@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styles from "./ArticlesList.module.css";
 import { ArticleTile } from "../index";
+import "../../App.css";
 
 interface IArticle {
   title: string;
@@ -28,9 +29,13 @@ export default function ArticlesList() {
   }, []);
 
   return (
-    <section className={styles.articlesList}>
+    <section className="container">
       {articles.map((article) => (
-        <ArticleTile title={article.title} content={article.body} />
+        <ArticleTile
+          title={article.title}
+          content={article.body}
+          id={article.id}
+        />
       ))}
     </section>
   );

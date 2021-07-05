@@ -1,7 +1,12 @@
 import React from "react";
 import "./App.css";
-import { Button, ArticlesList, Navbar, Article } from "./components/";
-
+import {
+  Button,
+  ArticlesList,
+  Navbar,
+  Article,
+  Favorites,
+} from "./components/";
 import { Switch, Route } from "react-router-dom";
 
 function App() {
@@ -10,7 +15,8 @@ function App() {
       <Navbar />
       <Switch>
         <Route exact path="/" component={ArticlesList} />
-        <Route exact path="/article/:id" component={Article} />
+        <Route exact path="/artykul/:id" component={Article} />
+        <Route exact path="/ulubione/" component={Favorites} />
       </Switch>
     </div>
   );

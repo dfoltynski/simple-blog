@@ -34,16 +34,12 @@ export default function ArticleTile({ title, content, id }: IProps) {
   };
 
   const handleClick = () => {
-    console.log(heartRef.current.classList.contains("active"));
-
     if (heartRef.current.classList.contains("active")) {
       heartRef.current.classList.remove("active");
-      console.log(heartRef.current.childNodes[0]);
       setFavorite(false);
       dispatch(removeFavorite(id));
     } else {
       heartRef.current.classList.add("active");
-      console.log(heartRef.current.children[0]);
       setFavorite(true);
 
       dispatch(addFavorite(id));
@@ -65,23 +61,15 @@ export default function ArticleTile({ title, content, id }: IProps) {
       <p className={styles.content}>{content}</p>
       <div className={styles.footer}>
         <span
-          style={{ alignSelf: "center" }}
+          className={styles.heartContainer}
           onClick={handleClick}
           ref={heartRef}
           id={id.toString()}
         >
-          {/* {favorites.map((favoriteArticle) =>
-            (favoriteArticle || -1) == id ? (
-              <AiFillHeart className={styles.favorite} color="#FFA39D" />
-            ) : (
-              <AiFillHeart className={styles.favorite} color="#D6D6D6" />
-            )
-          )} */}
           <AiFillHeart
             className={styles.favorite}
             color={favorite ? "#FFA39D" : "#D6D6D6"}
           />
-          {/* <AiFillHeart className={styles.favorite} color="#D6D6D6" /> */}
         </span>
         <p className={styles.articleDate}>{randomDate}</p>
         <Link to={`/artykul/${id}`}>

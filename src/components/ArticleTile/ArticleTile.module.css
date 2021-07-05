@@ -50,3 +50,8 @@
 .heart--active {
   color: #ffa39d;
 }
+
+.heartContainer {
+  align-self: center;
+  z-index: 2;
+}

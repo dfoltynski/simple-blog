@@ -30,7 +30,6 @@ export default function ArticlesList() {
         res.data.forEach((item: any) => {
           item.favorite = false;
         });
-        console.log(res.data);
         setArticles(res.data);
         setLoaded(true);
       } catch (error) {
@@ -38,18 +37,6 @@ export default function ArticlesList() {
       }
     })();
   }, []);
-
-  // useEffect(() => {
-  //   if (favorites.length > 0) {
-  //     favorites.map((favoriteArticle, id) => {
-  //       console.log(id);
-
-  //       if (favoriteArticle == articles[id].id) {
-  //         articles[id].favorite = true;
-  //       }
-  //     });
-  //   }
-  // }, [favorites]);
 
   return (
     <section className="container">

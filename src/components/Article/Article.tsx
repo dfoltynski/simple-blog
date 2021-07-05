@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import styles from "./Article.module.css";
 import "../../App.css";
 import { Button } from "../index";
+import { useDispatch, useSelector } from "react-redux";
+import { addComment } from "../../actions/commentsAction";
+import { RootState } from "../../reducers";
 
 interface IParams {
   id: string;
@@ -19,11 +22,13 @@ interface IComment {
   body: string;
   email: string;
   id: number;
-  name: string;
-  postId: number;
+  name?: string;
+  postId?: number;
 }
 
 export default function Article() {
+  const dispatch = useDispatch();
+  const userComments = useSelector((state: RootState) => state.comments);
   const commentFieldRef = useRef<HTMLInputElement>(
     document.createElement("input")
   );
@@ -43,8 +48,14 @@ export default function Article() {
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const addComment = () => {
+  const handleAddComment = () => {
+    const user = commentFieldRef.current.value;
+    const content = userFieldRef.current.value;
+
+    dispatch(addComment({ email: user, body: content, id: Number(id) }));
+
     commentFieldRef.current.value = "";
+    userFieldRef.current.value = "";
   };
 
   useEffect(() => {
@@ -66,11 +77,39 @@ export default function Article() {
         setArticle(article);
         setComments(comments);
         setIsLoading(false);
+
+        userComments.forEach((userComment) => {
+          if (Number(userComment.id) == Number(id)) {
+            setComments([
+              {
+                email: userComment.email,
+                body: userComment.body,
+                id: userComment.id,
+              },
+              ...comments,
+            ]);
+          }
+        });
       } catch (error) {
         console.log(error);
       }
     })();
   }, []);
+
+  useEffect(() => {
+    userComments.forEach((userComment) => {
+      if (Number(userComment.id) == Number(id)) {
+        setComments([
+          {
+            email: userComment.email,
+            body: userComment.body,
+            id: userComment.id,
+          },
+          ...comments,
+        ]);
+      }
+    });
+  }, [userComments]);
 
   return (
     <>
@@ -102,15 +141,15 @@ export default function Article() {
               <Button
                 value="Dodaj komentarz"
                 backgroundColor="#9DD6FF"
-                handleClick={addComment}
+                handleClick={handleAddComment}
               />
             </div>
 
             <div className={styles.comments}>
-              {comments.map((a) => (
+              {comments.map((comment) => (
                 <div className={styles.comment}>
-                  <h3 className={styles.name}>{a.name}</h3>
-                  <p className={styles.commentBody}>{a.body}</p>
+                  <h3 className={styles.name}>{comment.email.split("@")[0]}</h3>
+                  <p className={styles.commentBody}>{comment.body}</p>
                 </div>
               ))}
             </div>

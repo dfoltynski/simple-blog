@@ -1,0 +1,24 @@
+.emptyContainer {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  text-align: center;
+}
+
+.info {
+  margin: 1em;
+}
+
+.infoBody {
+  color: #989898;
+  display: flex;
+  justify-content: center;
+}
+
+.heart {
+  margin: 0 0.2em;
+  align-self: center;
+}

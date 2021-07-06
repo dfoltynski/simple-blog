@@ -39,6 +39,7 @@
 
 .commentBody {
   font-size: 14px;
+  margin: 0.2em;
   margin-left: 1em;
 }
 
@@ -49,4 +50,16 @@
 .comment {
   font-weight: 500;
   margin-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+}
+
+.deleteButton {
+  align-self: flex-end;
+  border: none;
+  background-color: #ffa39d;
+  font-weight: 600;
+  font-size: 10px;
+  padding: 0.6em;
+  cursor: pointer;
 }

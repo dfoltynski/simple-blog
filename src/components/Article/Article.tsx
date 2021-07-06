@@ -4,7 +4,7 @@ import styles from "./Article.module.css";
 import "../../App.css";
 import { Button } from "../index";
 import { useDispatch, useSelector } from "react-redux";
-import { addComment } from "../../actions/commentsAction";
+import { addComment, deleteComment } from "../../actions/commentsAction";
 import { RootState } from "../../reducers";
 
 interface IParams {
@@ -24,6 +24,7 @@ interface IComment {
   id: number;
   name?: string;
   postId?: number;
+  isUserAnAuthor?: boolean;
 }
 
 export default function Article() {
@@ -35,6 +36,9 @@ export default function Article() {
   const userFieldRef = useRef<HTMLInputElement>(
     document.createElement("input")
   );
+  const commentRef = useRef<HTMLDivElement>(document.createElement("div"));
+  const userRef = useRef<HTMLHeadingElement>(document.createElement("h3"));
+
   const { id } = useParams<IParams>();
   const [article, setArticle] = useState<IArticle>({
     title: "",
@@ -49,8 +53,8 @@ export default function Article() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const handleAddComment = () => {
-    const user = commentFieldRef.current.value;
-    const content = userFieldRef.current.value;
+    const user = userFieldRef.current.value;
+    const content = commentFieldRef.current.value;
 
     dispatch(addComment({ email: user, body: content, id: Number(id) }));
 
@@ -85,6 +89,7 @@ export default function Article() {
                 email: userComment.email,
                 body: userComment.body,
                 id: userComment.id,
+                isUserAnAuthor: true,
               },
               ...comments,
             ]);
@@ -104,6 +109,7 @@ export default function Article() {
             email: userComment.email,
             body: userComment.body,
             id: userComment.id,
+            isUserAnAuthor: true,
           },
           ...comments,
         ]);
@@ -124,8 +130,8 @@ export default function Article() {
             <input
               placeholder="Nazwa użytkownika"
               type="text"
-              name="comment"
-              id="comment"
+              name="user"
+              id="user"
               ref={userFieldRef}
               className={styles.userField}
             />
@@ -147,8 +153,10 @@ export default function Article() {
 
             <div className={styles.comments}>
               {comments.map((comment) => (
-                <div className={styles.comment}>
-                  <h3 className={styles.name}>{comment.email.split("@")[0]}</h3>
+                <div className={styles.comment} ref={commentRef}>
+                  <h3 className={styles.name} ref={userRef}>
+                    {comment.email.split("@")[0]}
+                  </h3>
                   <p className={styles.commentBody}>{comment.body}</p>
                 </div>
               ))}

@@ -1,7 +1,7 @@
 interface IComment {
-  body: string;
+  body?: string;
   email: string;
-  id: number;
+  id?: number;
   name?: string;
   postId?: number;
 }
@@ -9,6 +9,13 @@ interface IComment {
 export const addComment = (payload: IComment) => {
   return {
     type: "ADD_COMMENT",
+    payload,
+  };
+};
+
+export const deleteComment = (payload: IComment) => {
+  return {
+    type: "REMOVE_COMMENT",
     payload,
   };
 };
